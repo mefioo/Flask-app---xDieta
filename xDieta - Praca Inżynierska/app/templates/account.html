@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block brand %}
+    <a href="/main_logged_in" class="navbar-brand mr-2" style="font-size: 50px;"><img src="{{ url_for('static', filename='img/fork.png') }}" width="110" height="110"></a>
+
+    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#mainnav,#logreg" aria-controls="#mainnav,#logreg" aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+{% endblock brand %}
+{% block nav1 %}
+    <li class="nav-item"><a href="{{ url_for('account') }}" class="nav-link">Moje konto</a></li>
+    <li class="nav-item"><a href="{{ url_for('products_meals') }}" class="nav-link">Baza produktów i posiłków</a></li>
+    <li class="nav-item"><a href="{{ url_for('diets') }}" class="nav-link">Diety</a></li>
+    <li class="nav-item"><a href="{{ url_for('activities') }}" class="nav-link">Aktywności</a></li>
+{% endblock nav1 %}
+{% block navigation %}
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a> </li>
+{% endblock navigation %}
+{% block content %}
+    <div class="form p-2" style="height: auto;">
+        <div class="account ml-3 mr-3">
+            <form method="POST" action="">
+
+                <fieldset class="form-group">
+                    <div class="form-group">
+                        <legend class="text-center border-bottom">Moje dane</legend>
+                    </div>
+                </fieldset>
+                <div class="border-top text-right">
+                    <small><a href="{{ url_for('edit_data') }}">Edytuj dane</a></small>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

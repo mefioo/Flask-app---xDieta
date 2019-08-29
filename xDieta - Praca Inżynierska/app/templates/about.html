@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block brand %}
+    <a href="/main_logged_in" class="navbar-brand mr-2" style="font-size: 50px;"><img src="{{ url_for('static', filename='img/fork.png') }}" width="110" height="110"></a>
+
+    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#mainnav,#logreg" aria-controls="#mainnav,#logreg" aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+{% endblock brand %}
+{% block nav1 %}
+    <li class="nav-item"><a href="{{ url_for('account') }}" class="nav-link">Moje konto</a></li>
+    <li class="nav-item"><a href="{{ url_for('products_meals') }}" class="nav-link">Baza produktów i posiłków</a></li>
+    <li class="nav-item"><a href="{{ url_for('diets') }}" class="nav-link">Diety</a></li>
+    <li class="nav-item"><a href="{{ url_for('activities') }}" class="nav-link">Aktywności</a></li>
+{% endblock nav1 %}
+
+{% block navigation %}
+
+{% endblock navigation %}
+{% block content %}
+
+{% endblock content %}
