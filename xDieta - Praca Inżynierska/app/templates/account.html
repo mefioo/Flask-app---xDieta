@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block brand %}
-    <a href="/main_logged_in" class="navbar-brand mr-2" style="font-size: 50px;"><img src="{{ url_for('static', filename='img/fork.png') }}" width="110" height="110"></a>
+    <a href="/main_logged_in" class="navbar-brand mr-2" style="font-size: 50px;"><img src="{{ url_for('static', filename='images/fork.png') }}" width="110" height="110"></a>
 
     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#mainnav,#logreg" aria-controls="#mainnav,#logreg" aria-expanded="false">
         <span class="navbar-toggler-icon"></span>
@@ -10,25 +10,80 @@
     <li class="nav-item"><a href="{{ url_for('account') }}" class="nav-link">Moje konto</a></li>
     <li class="nav-item"><a href="{{ url_for('products_meals') }}" class="nav-link">Baza produktów i posiłków</a></li>
     <li class="nav-item"><a href="{{ url_for('diets') }}" class="nav-link">Diety</a></li>
-    <li class="nav-item"><a href="{{ url_for('activities') }}" class="nav-link">Aktywności</a></li>
+    <li class="nav-item"><a href="{{ url_for('users_activities') }}" class="nav-link">Aktywności</a></li>
 {% endblock nav1 %}
 {% block navigation %}
     <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a> </li>
 {% endblock navigation %}
 {% block content %}
-    <div class="form p-2" style="height: auto;">
+<div class="row mr-0 content-wrap">
+    <div class="col-xl-3 col-sm-1">
+
+    </div>
+    <div class="container col-xl-6 col-sm-10 bg">
+        <div class="form p-2" style="height: auto;">
         <div class="account ml-3 mr-3">
-            <form method="POST" action="">
+            <form>
 
                 <fieldset class="form-group">
                     <div class="form-group">
                         <legend class="text-center border-bottom">Moje dane</legend>
                     </div>
+                    <div class="form-group float-left mr-5 mt-2">
+                        <p><label>Login:</label></p>
+                        <p><label>E-mail:</label></p>
+                        <p><label>Imię:</label></p>
+                        <p><label>Nazwisko:</label></p>
+                        <p><label>Wiek:</label></p>
+                        <p><label>Waga:</label></p>
+                        <p><label>Wzrost:</label></p>
+                        <p><label>Płeć:</label></p>
+                        <p><label>Tryb pracy:</label></p>
+                    </div>
+                    <div class="form-group clearfix mt-4" style="color: #4d004d;">
+                        <p><label>{{data[1]}} </label></p>
+                        <p><label>{{data[2]}} </label></p>
+                        {% for x in range(5, 10) %}
+                            {% if data[x] == None %}
+                                <p><label>.</label></p>
+                            {% else %}
+                                <p><label>{{ data[x] }}</label></p>
+                            {% endif %}
+                        {% endfor %}
+                        {% if data[10] == 'M' %}
+                        <p><label>Mężczyzna</label></p>
+                        {% else %}
+                        <p><label>Kobieta</label></p>
+                        {% endif %}
+                        {% if data[11] == 1 %}
+                            <p><label>Brak ruchu</label></p>
+                        {% elif data[11] == 2 %}
+                            <p><label>Nieduża ilość ruchu</label></p>
+                        {% elif data[11] == 3 %}
+                            <p><label>Średnia ilość ruchu</label></p>
+                        {% elif data[11] == 4 %}
+                            <p><label>Duża ilość ruchu</label></p>
+                        {% elif data[11] == 5 %}
+                            <p><label>Praca w ciągłym ruchu</label></p>
+                        {% endif %}
+                    </div>
                 </fieldset>
                 <div class="border-top text-right">
-                    <small><a href="{{ url_for('edit_data') }}">Edytuj dane</a></small>
+                    <small><a href="{{ url_for('edit_data') }}" class="min">Edytuj dane personalne</a></small>
                 </div>
             </form>
+
+            </div>
+        </div>
+
+        <div class="text-center pt-4 pb-4">
+            <a href="{{ url_for('change_password') }}" class="btn pt-2">Zmień hasło</a>
         </div>
     </div>
+    <div class="col-xl-3 col-sm-1">
+
+    </div>
+
+</div>
+
 {% endblock content %}

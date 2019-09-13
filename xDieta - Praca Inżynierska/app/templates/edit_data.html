@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block brand %}
-    <a href="/main_logged_in" class="navbar-brand mr-2" style="font-size: 50px;"><img src="{{ url_for('static', filename='img/fork.png') }}" width="110" height="110"></a>
+    <a href="/main_logged_in" class="navbar-brand mr-2" style="font-size: 50px;"><img src="{{ url_for('static', filename='images/fork.png') }}" width="110" height="110"></a>
 
     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#mainnav,#logreg" aria-controls="#mainnav,#logreg" aria-expanded="false">
         <span class="navbar-toggler-icon"></span>
@@ -10,13 +10,18 @@
     <li class="nav-item"><a href="{{ url_for('account') }}" class="nav-link">Moje konto</a></li>
     <li class="nav-item"><a href="{{ url_for('products_meals') }}" class="nav-link">Baza produktów i posiłków</a></li>
     <li class="nav-item"><a href="{{ url_for('diets') }}" class="nav-link">Diety</a></li>
-    <li class="nav-item"><a href="{{ url_for('activities') }}" class="nav-link">Aktywności</a></li>
+    <li class="nav-item"><a href="{{ url_for('users_activities') }}" class="nav-link">Aktywności</a></li>
 {% endblock nav1 %}
 {% block navigation %}
     <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a> </li>
 {% endblock navigation %}
 {% block content %}
-    <div class="form p-2" style="height: auto;">
+<div class="row mr-0 content-wrap">
+    <div class="col-xl-3 col-sm-1">
+
+    </div>
+    <div class="container col-xl-6 col-sm-10 bg">
+        <div class="form p-2" style="height: auto;">
         <div class="account ml-3 mr-3">
             <div class="content-section">
                 <form method="POST" action="">
@@ -32,7 +37,8 @@
                                 <span>Imię powinno zawierać do 20 znaków.</span>
                             </div>
                             {% else %}
-                                {{ form.name(class="form-control form-control-lg") }}
+                                {{ form.name(class="form-control form-control-lg", placeholder="") }}
+
                             {% endif %}
                         </div>
                         <div class="form-group">
@@ -44,7 +50,7 @@
                                 <span>Nazwisko powinno zawierać do 30 znaków.</span>
                             </div>
                             {% else %}
-                                {{ form.surname(class="form-control form-control-lg") }}
+                                {{ form.surname(class="form-control form-control-lg", placeholder="") }}
                             {% endif %}
                         </div>
                         <div class="form-group">
@@ -53,7 +59,7 @@
                             {% if form.age.errors %}
                                 {{ form.age(class="form-control form-control-lg is-invalid") }}
                             <div class="invalid feedback">
-                                <span>Wiek powinien być liczbą w przedziale od 1 do 110</span>
+                                <span>Wiek powinien być liczbą w przedziale od 15 do 110</span>
                             </div>
                             {% else %}
                                 {{ form.age(class="form-control form-control-lg") }}
@@ -87,9 +93,13 @@
                             {{ form.sex.label(class="form-control-label ml-2") }}
                             {{ form.sex(class="form-control form-control-lg") }}
                         </div>
+                        <div class="form-group">
+                            {{ form.working_routine.label(class="form-control-label ml-2") }}
+                            {{ form.working_routine(class="form-control form-control-lg") }}
+                        </div>
                     </fieldset>
                     <div class="form-gruop text-center mt-2 mb-1">
-                        {{ form.submit(class="btn btn-outline-info") }}
+                        {{ form.submit(class="btn") }}
                     </div>
                     <div class="text-muted text-right">
                         <small>*  pola wymagane</small>
@@ -98,4 +108,11 @@
             </div>
         </div>
     </div>
+    </div>
+    <div class="col-xl-3 col-sm-1">
+
+    </div>
+
+</div>
+
 {% endblock content %}

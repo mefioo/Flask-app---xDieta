@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block brand %}
-    <a href="/main_logged_in" class="navbar-brand mr-2" style="font-size: 50px;"><img src="{{ url_for('static', filename='img/fork.png') }}" width="110" height="110"></a>
+    <a href="/main_logged_in" class="navbar-brand mr-2" style="font-size: 50px;"><img src="{{ url_for('static', filename='images/fork.png') }}" width="110" height="110"></a>
 
     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#mainnav,#logreg" aria-controls="#mainnav,#logreg" aria-expanded="false">
         <span class="navbar-toggler-icon"></span>
@@ -10,11 +10,119 @@
     <li class="nav-item"><a href="{{ url_for('account') }}" class="nav-link">Moje konto</a></li>
     <li class="nav-item"><a href="{{ url_for('products_meals') }}" class="nav-link">Baza produktów i posiłków</a></li>
     <li class="nav-item"><a href="{{ url_for('diets') }}" class="nav-link">Diety</a></li>
-    <li class="nav-item"><a href="{{ url_for('activities') }}" class="nav-link">Aktywności</a></li>
+    <li class="nav-item"><a href="{{ url_for('users_activities') }}" class="nav-link">Aktywności</a></li>
 {% endblock nav1 %}
 {% block navigation %}
     <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a> </li>
 {% endblock navigation %}
 {% block content %}
+<!--            <div class="row mr-0">-->
+<!--                    <div class="col-xl-3 col-sm-1">-->
+
+<!--                    </div>-->
+<!--                    <div class="col-xl-3 col-sm-5">-->
+<!--                        <div class="text-center mb-5">-->
+<!--                            <a href="{{ url_for('account') }}"><i class="icon far fa-user"></i></a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-xl-3 col-sm-5">-->
+<!--                        <div class="text-center mb-5">-->
+<!--                            <a href="{{ url_for('products_meals') }}"><i class="icon fas fa-pizza-slice"></i></a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-xl-3 col-sm-1">-->
+
+<!--                    </div>-->
+<!--            </div>-->
+<!--            <div class="row mr-0">-->
+<!--                    <div class="col-xl-2 col-sm-1">-->
+
+<!--                    </div>-->
+<!--                    <div class="col-xl-4 col-sm-5">-->
+<!--                        <div class="text-center mb-5">-->
+<!--                            <a href="{{ url_for('diets') }}"><i class="icon far fa-calendar-alt"></i></a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-xl-4 col-sm-5">-->
+<!--                        <div class="text-center mb-5">-->
+<!--                            <a href="{{ url_for('activities') }}"><i class="icon fas fa-swimmer"></i></a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-xl-2 col-sm-1">-->
+
+<!--                    </div>-->
+<!--            </div>-->
+<!--            <div class="row mr-0">-->
+<!--                    <div class="col-xl-3 col-sm-1">-->
+
+<!--                    </div>-->
+<!--                    <div class="col-xl-3 col-sm-5">-->
+<!--                        <div class="text-center mb-5">-->
+<!--                            <a href="{{ url_for('contact_logged_in') }}"><i class="icon fas fa-phone"></i></a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-xl-3 col-sm-5">-->
+<!--                        <div class="text-center mb-5">-->
+<!--                            <a href="{{ url_for('about_logged_in') }}"><i class="icon fas fa-info"></i></a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-xl-3 col-sm-1">-->
+
+<!--                    </div>-->
+<!--            </div>-->
+
+<div class="row mr-0">
+        <div class="col-xl-2">
+
+        </div>
+        <div class="col-xl-8">
+            <div class="container table-responsive pb-0 mb-5 pt-2 table-container">
+                <div class="text-center mb-3 border-bottom">
+                    <h1>Twoja dieta na dziś!</h1>
+                </div>
+                <table class="table table-light">
+                    <thead>
+                        <th scope="col">Śniadanie</th>
+                        <th scope="col">Lunch</th>
+                        <th scope="col">Obiad</th>
+                        <th scope="col">Podwieczorek</th>
+                        <th scope="col">Kolacja</th>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            {% for row in data %}
+                                <td>
+                                    {{ row[0] }}
+                                </td>
+                            {% endfor %}
+
+                        </tr>
+                        <tr>
+                            {% for row in data %}
+                                <td>
+                                    <div class="border-top">
+                                        <small class="min">
+                                            {% for x in row[1] %}
+                                                {{ x[0] }} - {{ x[1] }}&nbsp;&nbsp;g<br>
+                                            {% endfor %}
+                                        </small>
+                                    </div>
+                                </td>
+                            {% endfor %}
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="text-muted text-right border-top pb-2">
+                    <small></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-2">
+
+        </div>
+    </div>
 
 {% endblock content %}

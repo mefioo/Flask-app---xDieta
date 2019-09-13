@@ -24,39 +24,24 @@
         <div class="col-xl-8">
             <div class="container table-responsive pb-0 mb-5 pt-2 table-container">
                 <div class="text-center mb-3 border-bottom">
-                    <h1>Moje diety</h1>
+                    <h1>Moje aktywności fizyczne</h1>
                 </div>
                 <table class="table display table-light" id="mytable">
                     <thead>
-                        <th scope="col">Nr</th>
-                        <th scope="col">Śniadanie</th>
-                        <th scope="col">Lunch</th>
-                        <th scope="col">Obiad</th>
-                        <th scope="col">Podwieczorek</th>
-                        <th scope="col">Kolacja</th>
-                        <th scope="col" style="width: 75px;">Data dodania</th>
+                        <th scope="col">Nazwa aktywności</th>
+                        <th scope="col">Tygodniowy czas aktywności (w godzinach)</th>
+                        <th scope="col">Spalana energia w 1. godzinę (kcal)</th>
                     </thead>
                     <tbody>
-                        {% for diets in data %}
+                        {% for activity, time, energy in data %}
                             <tr>
-                                <td>{{ diets[0] }}</td>
-                                <td>{{ diets[1] }}</td>
-                                <td>{{ diets[2] }}</td>
-                                <td>{{ diets[3] }}</td>
-                                <td>{{ diets[4] }}</td>
-                                <td>{{ diets[5] }}</td>
-                                <td>{{ diets[6] }}</td>
+                                <td>{{ activity }}</td>
+                                <td>{{ time }}</td>
+                                <td>{{ energy }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-                <div class="border-top">
-                    <small>
-                        <p class="min text-right mt-2">
-                            By sprawdzić składniki potrzebne do przygotowania posiłku przejdź do zakładki "Baza produktów i posiłków".
-                        </p>
-                    </small>
-                </div>
             </div>
 
         </div>
@@ -65,20 +50,22 @@
         </div>
     </div>
     <div class="row mr-0 pb-5">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-4 text-center mb-3">
-            <div class="text-center">
-                <form method="POST" action="">
-                {{ form.hidden_tag() }}
-                {{ form.submit(class="btn") }}
-                </form>
+        <div class="col-xl-1"></div>
+        <div class="col-xl-3 text-center">
+            <div class="text-center mb-3">
+                <a href="{{ url_for('user_add_activity') }}" class="btn pt-2">Dodaj nowe aktywności</a>
             </div>
         </div>
-        <div class="col-sm-4 text-center mb-3">
-            <div class="text-center">
-                <a href="{{ url_for('user_delete_diet') }}" class="btn pt-2">Usuń dietę</a>
+        <div class="col-xl-4 text-center">
+            <div class="text-center mb-3">
+                <a href="{{ url_for('user_edit_activities') }}" class="btn pt-2">Edytuj swoje aktywności</a>
             </div>
         </div>
-        <div class="col-sm-2"></div>
+        <div class="col-xl-3 text-center">
+            <div class="text-center mb-3">
+                <a href="{{ url_for('activities') }}" class="btn pt-2">Baza aktywności fizycznych</a>
+            </div>
+        </div>
+        <div class="col-xl-1"></div>
     </div>
 {% endblock content %}

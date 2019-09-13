@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block brand %}
-    <a href="/" class="navbar-brand mr-2" style="font-size: 50px;"><img src="{{ url_for('static', filename='img/fork.png') }}" width="110" height="110"></a>
+    <a href="/" class="navbar-brand mr-2" style="font-size: 50px;"><img src="{{ url_for('static', filename='images/fork.png') }}" width="110" height="110"></a>
 
     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#mainnav,#logreg" aria-controls="#mainnav,#logreg" aria-expanded="false">
         <span class="navbar-toggler-icon"></span>
@@ -13,7 +13,12 @@
 
 {% endblock navigation %}
 {% block content %}
-    <div class="form p-2">
+<div class="row mr-0 content-wrap">
+    <div class="col-xl-3 col-sm-1">
+
+    </div>
+    <div class="container col-xl-6 col-sm-10 bg">
+        <div class="form p-2">
         <div class="login ml-3 mr-3">
             <div class="content-section">
                 <form method="post" action="">
@@ -69,16 +74,23 @@
 
                     </fieldset>
                     <div class="form-group text-center">
-                        {{ form.submit(class="btn btn-outline-info") }}
+                        {{ form.submit(class="btn") }}
                     </div>
                 </form>
             </div>
             <div class="border-top mt-5">
                 <small class="text-muted">
-                    Masz już konto? <a class="ml-2" href="{{ url_for('login') }}">Zaloguj</a>
+                    Masz już konto? <a class="min ml-2" href="{{ url_for('login') }}">Zaloguj</a>
                 </small>
             </div>
         </div>
     </div>
+    </div>
+    <div class="col-xl-3 col-sm-1">
+
+    </div>
+
+</div>
+
 
 {% endblock content %}

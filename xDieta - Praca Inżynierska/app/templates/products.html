@@ -23,13 +23,15 @@
         <div class="col-xl-8">
             <div class="container table-responsive pb-0 mb-5 pt-2 table-container">
                 <div class="text-center mb-3 border-bottom">
-                    <h1>Baza aktywności fizycznych i spalanej energii</h1>
+                    <h1>Baza produktów</h1>
                 </div>
                 <table class="table display table-light" id="mytable">
                     <thead>
-                        <th scope="col">Numer aktywności</th>
-                        <th scope="col">Nazwa aktywności</th>
-                        <th scope="col">Spalana energia w 1. godzinę</th>
+                        <th scope="col">Numer produktu</th>
+                        <th scope="col">Nazwa produktu</th>
+                        <th scope="col">Białko w 100g</th>
+                        <th scope="col">Tłuszcze w 100g</th>
+                        <th scope="col">Weglowodany w 100g</th>
                     </thead>
                     <tbody>
                     {% for x in data %}
@@ -37,12 +39,14 @@
                             <td>{{ x[0] }}</td>
                             <td>{{ x[1] }}</td>
                             <td>{{ x[2] }}</td>
+                            <td>{{ x[3] }}</td>
+                            <td>{{ x[4] }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
                 <div class="text-muted text-right border-top pb-2">
-                    <small ><a class="min" href="{{ url_for('users_activities') }}">Sprawdź swoje tygodniowe aktywności fizyczne</a> </small>
+                    <small ><a class="min" href="{{ url_for('products_meals') }}">Baza posiłków</a> </small>
                 </div>
             </div>
         </div>
