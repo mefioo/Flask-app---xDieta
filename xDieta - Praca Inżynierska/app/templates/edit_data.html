@@ -11,6 +11,12 @@
     <li class="nav-item"><a href="{{ url_for('products_meals') }}" class="nav-link">Baza produktów i posiłków</a></li>
     <li class="nav-item"><a href="{{ url_for('diets') }}" class="nav-link">Diety</a></li>
     <li class="nav-item"><a href="{{ url_for('users_activities') }}" class="nav-link">Aktywności</a></li>
+    {% if perm == 1 %}
+        <li class="nav-item"><a href="{{ url_for('specialist') }}" class="nav-link">Specjalista</a></li>
+    {% endif %}
+    {% if perm == 2 %}
+        <li class="nav-item"><a href="{{ url_for('admin') }}" class="nav-link">Admin</a></li>
+    {% endif %}
 {% endblock nav1 %}
 {% block navigation %}
     <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a> </li>

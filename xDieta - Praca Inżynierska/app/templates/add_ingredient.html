@@ -33,30 +33,50 @@
                 <form method="POST" action="">
                 {{ form.hidden_tag() }}
                     <fieldset class="form-group">
-                        <legend class="text-center border-bottom mt-10 mb-10">Edytuj lub usuń aktywność</legend>
+                        <legend class="text-center border-bottom mt-10 mb-10">Dodaj produkt</legend>
                         <div class="form-group">
                             {{ form.name.label(class="form-control-label ml-2") }}
                             {{ form.name(class="form-control form-control-lg") }}
                         </div>
                         <div class="form-group">
-                            {{ form.time.label(class="form-control-label ml-2") }}
-
-                            {% if form.time.errors %}
-                                {{ form.time(class="form-control form-control-lg is-invalid") }}
+                            {{ form.protein.label(class="form-control-label ml-2") }}
+                            {% if form.protein.errors %}
+                                {{ form.protein(class="form-control form-control-lg is-invalid") }}
                             <div class="invalid feedback">
-                                <span>Liczba godzin powininna być liczbą w przedziale od 1 do 110</span>
+                                <span>Zawartość białka powinna wynosić od 0 do 100.</span>
                             </div>
                             {% else %}
-                                {{ form.time(class="form-control form-control-lg") }}
+                                {{ form.protein(class="form-control form-control-lg", placeholder="") }}
                             {% endif %}
                         </div>
-
+                        <div class="form-group">
+                            {{ form.fats.label(class="form-control-label ml-2") }}
+                            {% if form.fats.errors %}
+                                {{ form.fats(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid feedback">
+                                <span>Zawartość tłuszczy powinna wynosić od 0 do 100.</span>
+                            </div>
+                            {% else %}
+                                {{ form.fats(class="form-control form-control-lg", placeholder="") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.carbos.label(class="form-control-label ml-2") }}
+                            {% if form.carbos.errors %}
+                                {{ form.carbos(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid feedback">
+                                <span>Zawartość węglowodanów powinna wynosić od 0 do 100.</span>
+                            </div>
+                            {% else %}
+                                {{ form.carbos(class="form-control form-control-lg", placeholder="") }}
+                            {% endif %}
+                        </div>
                     </fieldset>
                     <div class="form-gruop text-center mt-2 mb-5">
                         {{ form.submit(class="btn") }}
                     </div>
                     <div class="text-muted text-right border-top">
-                        <small>* by usunąć aktywność pozostaw puste pole</small>
+
                     </div>
                 </form>
             </div>

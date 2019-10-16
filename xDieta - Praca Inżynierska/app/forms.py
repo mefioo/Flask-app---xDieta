@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, FloatField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, FloatField, SelectField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, NumberRange, Optional
 
 
@@ -57,3 +57,56 @@ class Add_diet(FlaskForm):
 class Delete_diet(FlaskForm):
     id = SelectField('Numer diety*', choices=[])
     submit = SubmitField('Usuń dietę')
+
+
+class Change_rights(FlaskForm):
+    username = SelectField('Nazwa użytkownika', choices=[])
+    rights = SelectField('Uprawnienia', choices=[('0', '0'), ('1', '1'), ('2', '2')])
+    submit = SubmitField('Zmień uprawnienia')
+
+
+class Delete_account(FlaskForm):
+    username = SelectField('Nazwa użytkownika', choices=[])
+    submit = SubmitField('Usuń konto')
+
+
+class Add_activity_Admin(FlaskForm):
+    name = StringField('Nazwa aktywności', validators=[DataRequired()])
+    kcal = IntegerField('Kalorie spalane w trakcie godziny wysiłku', validators=[DataRequired(), NumberRange(min=10, max=2000)])
+    submit = SubmitField('Dodaj aktywność')
+
+
+class Change_password_Admin(FlaskForm):
+    username = SelectField('Nazwa użytkownika', choices=[])
+    password = PasswordField('Nowe hasło', validators=[DataRequired()])
+    submit = SubmitField('Zmień hasło')
+
+
+class Add_meal(FlaskForm):
+    name = StringField('Nazwa posiłku', validators=[DataRequired()])
+    submit = SubmitField('Dodaj posiłek')
+
+
+class Add_product(FlaskForm):
+    name = StringField('Nazwa produktu', validators=[DataRequired()])
+    protein = IntegerField('Białko w 100g', validators=[NumberRange(min=0, max=100)])
+    fats = IntegerField('Tłuszcze w 100g', validators=[NumberRange(min=0, max=100)])
+    carbos = IntegerField('Węglowodany w 100g', validators=[NumberRange(min=0, max=100)])
+    submit = SubmitField('Dodaj produkt')
+
+
+class Add_product_to_meal(FlaskForm):
+    name = SelectField('Nazwa posiłku, do którego zostaną dodane produkty', choices=[])
+    ingredient = SelectField('Numer produktu', choices=[])
+    weight = IntegerField('Waga produktu', validators=[NumberRange(min=1)])
+    submit = SubmitField('Dodaj produkt do posiłku')
+
+
+class Delete_meal(FlaskForm):
+    name = SelectField('Nazwa posiłku', choices=[])
+    submit = SubmitField('Usuń posiłek')
+
+
+class Delete_ingredient(FlaskForm):
+    name = SelectField('Nazwa produktu', choices=[])
+    submit = SubmitField('Usuń produkt')

@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block brand %}
+    <a href="/main_logged_in" class="navbar-brand mr-2" style="font-size: 50px;"><img src="{{ url_for('static', filename='images/fork.png') }}" width="110" height="110"></a>
+
+    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#mainnav,#logreg" aria-controls="#mainnav,#logreg" aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+{% endblock brand %}
+{% block nav1 %}
+    <li class="nav-item"><a href="{{ url_for('account') }}" class="nav-link">Moje konto</a></li>
+    <li class="nav-item"><a href="{{ url_for('products_meals') }}" class="nav-link">Baza produktów i posiłków</a></li>
+    <li class="nav-item"><a href="{{ url_for('diets') }}" class="nav-link">Diety</a></li>
+    <li class="nav-item"><a href="{{ url_for('users_activities') }}" class="nav-link">Aktywności</a></li>
+    {% if perm == 1 %}
+        <li class="nav-item"><a href="{{ url_for('specialist') }}" class="nav-link">Specjalista</a></li>
+    {% endif %}
+    {% if perm == 2 %}
+        <li class="nav-item"><a href="{{ url_for('admin') }}" class="nav-link">Admin</a></li>
+    {% endif %}
+{% endblock nav1 %}
+
+{% block navigation %}
+<li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a> </li>
+{% endblock navigation %}
+{% block content %}
+
+            <div class="row mr-0 mb-5">
+                <div class="col-xl-4 col-sm-12">
+                    <a href="{{ url_for('add_meal') }}">
+                        <div class="block">
+                            <p class="tile">Dodaj posiłek</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xl-4 col-sm-12">
+                    <a href="{{ url_for('add_ingredient') }}">
+                        <div class="block">
+                            <p class="tile">Dodaj produkt</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xl-4 col-sm-12">
+                    <a href="{{ url_for('delete_meal') }}">
+                        <div class="block">
+                            <p class="tile">Usuń posiłek</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row mr-0 mb-5">
+                <div class="col-xl-4 col-sm-12">
+                    <a href="{{ url_for('add_ingredient_to_meal') }}">
+                        <div class="block">
+                            <p class="tile pt-3">Dodaj produkt do posiłku</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xl-4 col-sm-12">
+                    <a href="{{ url_for('add_activity_admin') }}">
+                        <div class="block">
+                            <p class="tile">Dodaj aktywność</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xl-4 col-sm-12">
+                    <a href="{{ url_for('delete_ingredient') }}">
+                        <div class="block">
+                            <p class="tile">Usuń produkt</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+{% endblock content %}

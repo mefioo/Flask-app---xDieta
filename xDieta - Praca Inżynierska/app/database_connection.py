@@ -20,10 +20,10 @@ cursor = link.cursor(buffered=True)
 class MySQLfind:
 
     def find_password_by_email(email):
-        cursor.execute("SELECT * FROM konta WHERE email='{}'".format(email))
+        cursor.execute("SELECT password FROM konta WHERE email='{}'".format(email))
         result = cursor.fetchall()
         try:
-            return result[0][3]
+            return result[0][0]
         except Exception as e:
             pass
 
@@ -133,6 +133,14 @@ class MySQLfind:
         except Exception as e:
             pass
 
+    def find_meal_id_by_name(name):
+        cursor.execute("SELECT id_posilku FROM posilki WHERE nazwa = '{}'".format(name))
+        result = cursor.fetchall()
+        try:
+            return result[0][0]
+        except Exception as e:
+            pass
+
     def find_id_by_activity_name(name):
         cursor.execute("SELECT id_aktywnosci FROM aktywnosci WHERE nazwa_aktywnosci='{}'".format(name))
         result = cursor.fetchall()
@@ -209,6 +217,14 @@ class MySQLfind:
         except Exception as e:
             pass
 
+    def find_ingredient_id_by_name(name):
+        cursor.execute("SELECT id_produktu FROM produkty WHERE nazwa = '{}'".format(name))
+        result = cursor.fetchall()
+        try:
+            return result[0][0]
+        except Exception as e:
+            pass
+
     def find_ingredients_in_meal_by_id(id):
         cursor.execute("SELECT id_produktu, waga_w_gramach FROM wiersze_posilkow WHERE id_posilku = '{}'".format(id))
         result = cursor.fetchall()
@@ -239,6 +255,22 @@ class MySQLfind:
         except Exception as e:
             pass
 
+    def find_meals_for_table(username):
+        meals = MySQLfind.find_for_table('posilki')
+        new_data = []
+        for row in meals:
+            info = []
+            ingredients = MySQLfind.find_ingredients_in_meal_by_id(row[0])
+            for ingredient, weight in ingredients:
+                tmp = (MySQLfind.find_ingredient_name_by_id(ingredient), int(weight))
+                info.append(tmp)
+            tmp = (row[0], MySQLfind.find_meal_name_by_id(row[0]), info)
+            new_data.append(tmp)
+
+        try:
+            return new_data
+        except Exception as e:
+            pass
 
     def find_meals_and_ingredients_for_table(username):
         meals = MySQLfind.find_for_table('posilki')
@@ -279,6 +311,45 @@ class MySQLfind:
         except Exception as e:
             pass
 
+    def find_all_usernames(table):
+        cursor.execute("SELECT username FROM " + table)
+        result = cursor.fetchall()
+        try:
+            return result
+        except Exception as e:
+            pass
+
+    def find_all_names(table):
+        cursor.execute("SELECT nazwa FROM " + table)
+        result = cursor.fetchall()
+        try:
+            return result
+        except Exception as e:
+            pass
+
+    def find_all_ids(table):
+        cursor.execute("SELECT id_posilku FROM " + table)
+        result = cursor.fetchall()
+        try:
+            return result
+        except Exception as e:
+            pass
+
+    def find_all_id_produktu(table):
+        cursor.execute("SELECT id_produktu FROM " + table)
+        result = cursor.fetchall()
+        try:
+            return result
+        except Exception as e:
+            pass
+
+    def find_ingredient_in_meal_row(id):
+        cursor.execute("SELECT * FROM wiersze_posilkow WHERE id_produktu = '{}'".format(id))
+        result = cursor.fetchall()
+        try:
+            return result
+        except Exception as e:
+            pass
 
 
 class MySQLinsert:
@@ -329,6 +400,40 @@ class MySQLinsert:
         except Exception as e:
             pass
 
+    def insert_activity(name, kcal):
+        sql_query = "INSERT INTO aktywnosci (nazwa_aktywnosci, spalana_energia) VALUES ('{}', '{}')".format(name, kcal)
+        try:
+            cursor.execute(sql_query)
+            link.commit()
+        except Exception as e:
+            pass
+
+    def insert_meal_name(name):
+        sql_query = "INSERT INTO posilki (nazwa) VALUES ('{}')".format(name)
+        try:
+            cursor.execute(sql_query)
+            link.commit()
+        except Exception as e:
+            pass
+
+    def insert_ingredient(name, protein, fats, carbos):
+        sql_squery = "INSERT INTO produkty (nazwa, bialko_w_100g, tluszcze_w_100g, wegle_w_100g) VALUES " \
+                     "('{}', '{}', '{}', '{}')".format(name, protein, fats, carbos)
+        try:
+            cursor.execute(sql_squery)
+            link.commit()
+        except Exception as e:
+            pass
+
+    def insert_ingredient_into_meal(meal, ingredient, weight):
+        sql_query = "INSERT INTO wiersze_posilkow (id_posilku, id_produktu, waga_w_gramach) VALUES " \
+                    "('{}', '{}', '{}')".format(meal, ingredient, weight)
+        try:
+            cursor.execute(sql_query)
+            link.commit()
+        except Exception as e:
+            pass
+
 
 class MySQLupdate:
 
@@ -352,6 +457,14 @@ class MySQLupdate:
     def update_user_activity(username, id, time):
         sql_query = "UPDATE wiersze_aktywnosci SET liczba_godzin_w_tygodniu = '{}' WHERE username = '{}' " \
                     "AND id_aktywnosci = '{}'".format(time, username, id)
+        try:
+            cursor.execute(sql_query)
+            link.commit()
+        except Exception as e:
+            pass
+
+    def update_user_rights(username, rights):
+        sql_query = "UPDATE konta SET rights = '{}' WHERE username = '{}'".format(rights, username)
         try:
             cursor.execute(sql_query)
             link.commit()
@@ -388,4 +501,35 @@ class MySQLdelete:
         except Exception as e:
             pass
 
+    def delete_user_account(username):
+        sql_query = "DELETE FROM konta WHERE username = '{}'".format(username)
+        try:
+            cursor.execute(sql_query)
+            link.commit()
+        except Exception as e:
+            pass
 
+    def delete_meal_rows(id):
+        sql_squery = "DELETE FROM wiersze_posilkow WHERE id_posilku = '{}'".format(id)
+        try:
+            cursor.execute(sql_squery)
+            link.commit()
+        except Exception as e:
+            pass
+
+    def delete_meal(id):
+        MySQLdelete.delete_meal_rows(id)
+        sql_squery = "DELETE FROM posilki WHERE id_posilku = '{}'".format(id)
+        try:
+            cursor.execute(sql_squery)
+            link.commit()
+        except Exception as e:
+            pass
+
+    def delete_ingredient(id):
+        sql_squery = "DELETE FROM produkty WHERE id_produktu = '{}'".format(id)
+        try:
+            cursor.execute(sql_squery)
+            link.commit()
+        except Exception as e:
+            pass

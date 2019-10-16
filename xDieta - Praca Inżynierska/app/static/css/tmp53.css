@@ -1,0 +1,302 @@
+html
+{
+    position: relative;
+    min-height: 100%;
+}
+
+body
+{
+    background-image: url('../images/dieta.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Livvic', sans-serif;
+    color: #4d4d4d;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.main
+{
+    flex: 1;
+}
+
+.header
+{
+    height: 100px !important;
+}
+
+.navbar
+{
+    background-color: white;
+    opacity: 0.8;
+}
+
+.navbar-brand-icon
+{
+    color: black;
+    transition-duration: 400ms;
+    transition-delay: 100ms;
+    padding-left: 30px;
+}
+
+.navbar-brand-icon:hover
+{
+    color: #4d4d4d;
+}
+
+.navbar-toggler
+{
+    margin-right: 0;
+}
+
+.navbar-toggler-icon
+{
+    font-size: 30px;
+}
+
+li
+{
+    font-size: 18px;
+    display: inline-block;
+    text-align: center;
+    max-width: 1200px;
+    margin-top: 0px;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    transition-duration: 400ms;
+    transition-delay: 100ms;
+}
+
+
+li:hover
+{
+    transform: scale(1.3);
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+}
+
+li a
+{
+    color: black;
+}
+
+li a:hover
+{
+    color: black;
+    text-decoration: none;
+}
+
+.nav-link
+{
+    color: black !important;
+}
+
+.container
+{
+    margin-top: 50px;
+    min-height: 450px;
+    height: auto;
+    padding-bottom: 110px;
+    overflow: auto;
+}
+
+.space
+{
+    height: 100px;
+}
+
+.form
+{
+    width: 450px;
+    height: 100%;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+}
+
+.first
+{
+    height: 800px;
+}
+
+.page-footer
+{
+    width: 100%;
+    margin-top: auto;
+    height: auto;
+    background-color: #1f1f2d;
+}
+
+
+.footer-copyright
+{
+
+    background-color: #0e0e1c;
+    text-align: center;
+    font-size: 15px;
+
+}
+
+.option
+{
+    font-size: 20px;
+    padding: 10px;
+}
+
+.option a
+{
+    color: #b3b3b3;
+    transition-duration: 400ms;
+    transition-delay: 100ms;
+    text-decoration: none;
+}
+
+.option a:hover
+{
+    color: #808080;
+}
+
+.container-main
+{
+    height: auto;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.main-logged
+{
+    height: 400px;
+}
+
+.icon
+{
+    font-size: 150px;
+    color: #1f1f2d;
+    padding-top: 50px;
+    transition: all 300ms ease-in-out;
+}
+
+.icon:hover
+{
+    transform: scale(1.1);
+}
+
+.btn
+{
+    background-image: linear-gradient(to right, #4d004d, #1f1f2d, #4d004d);
+    text-align: center;
+    width: 300px;
+    height: 50px;
+    border-radius: 25px;
+    transition: all 400ms ease-in-out;
+    color: white;
+}
+
+.btn a
+{
+    color: white;
+    font-size: 18px;
+}
+
+.btn a:hover
+{
+    text-decoration: none;
+    color: white;
+}
+
+.btn:hover
+{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    box-shadow: 15px white;
+    color: white;
+}
+
+.form-control:focus {
+    border-color: #4d004d;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px #4d004d;
+}
+
+.min
+{
+   color: #4d004d;
+}
+
+.min:hover
+{
+   color: #2b002b;
+}
+
+.dark
+{
+    margin-top: 50px;
+    font-size: 70px;
+    font-weight: 700;
+    height: auto;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+.table-container
+{
+    border-radius: 20px;
+    background-color: white;
+}
+
+.border-top
+{
+    color: #dee2e6;
+}
+
+tr span
+{
+    display: none;
+}
+
+tbody tr:hover span
+{
+    display: block;
+}
+
+.block
+{
+    margin-top: 50px;
+    opacity: .9;
+    background-color: white;
+    color: #4d004d;
+    border-radius: 20px;
+    height: 300px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 0.3s ease-in-out;
+    font-size: 55px;
+    text-align: center;
+}
+
+a:hover
+{
+    color: white;
+    text-decoration: none;
+}
+
+.block:hover
+{
+    transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    background-color: #4d004d;
+    color: white;
+}
+
+.tile
+{
+    padding-top: 50px;
+}

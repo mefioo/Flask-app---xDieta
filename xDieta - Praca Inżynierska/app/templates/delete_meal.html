@@ -22,51 +22,73 @@
     <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a> </li>
 {% endblock navigation %}
 {% block content %}
-<div class="row mr-0 content-wrap">
-    <div class="col-xl-3 col-sm-1">
+    <div class="row mr-0">
+        <div class="col-xl-1">
 
-    </div>
-    <div class="container col-xl-6 col-sm-10 bg">
-        <div class="form p-2" style="height: auto;">
+        </div>
+        <div class="container col-xl-5 bg ">
+        <div class="form p-2 mt-5" style="height: auto;">
         <div class="account ml-3 mr-3">
-            <div class="content-section">
+            <div class="content-section ">
                 <form method="POST" action="">
-                {{ form.hidden_tag() }}
+                    {{ form.csrf_token }}
+
                     <fieldset class="form-group">
-                        <legend class="text-center border-bottom mt-10 mb-10">Edytuj lub usuń aktywność</legend>
+                        <legend class="text-center border-bottom mt-10 mb-10">Usuń posiłek</legend>
                         <div class="form-group">
                             {{ form.name.label(class="form-control-label ml-2") }}
                             {{ form.name(class="form-control form-control-lg") }}
-                        </div>
-                        <div class="form-group">
-                            {{ form.time.label(class="form-control-label ml-2") }}
-
-                            {% if form.time.errors %}
-                                {{ form.time(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid feedback">
-                                <span>Liczba godzin powininna być liczbą w przedziale od 1 do 110</span>
-                            </div>
-                            {% else %}
-                                {{ form.time(class="form-control form-control-lg") }}
-                            {% endif %}
                         </div>
 
                     </fieldset>
                     <div class="form-gruop text-center mt-2 mb-5">
                         {{ form.submit(class="btn") }}
                     </div>
-                    <div class="text-muted text-right border-top">
-                        <small>* by usunąć aktywność pozostaw puste pole</small>
+                    <div class="text-muted border-top">
+
                     </div>
                 </form>
             </div>
         </div>
     </div>
     </div>
-    <div class="col-xl-3 col-sm-1">
+        <div class="col-xl-5">
+            <div class="container table-responsive pb-0 mb-4 pt-2 mt-2 table-container">
+                <div class="text-center mb-3 border-bottom">
+                    <h1>Baza posiłków</h1>
+                </div>
+                <table class="table display table-light" id="mytable">
+                    <thead>
+                        <th scope="col">Numer posiłku</th>
+                        <th scope="col">Nazwa posiłku</th>
+                    </thead>
+                    <tbody>
+
+                    {% for x in data %}
+                        <tr>
+                            <td>{{ x[0] }}</td>
+                            <td>
+                                {{ x[1] }}
+                            <span class="border-top">
+                                <small class="min">
+                                    {% for row in x[2] %}
+                                        {{ row[0] }} &nbsp;&nbsp;
+                                    {% endfor %}
+                                </small>
+                            </span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="text-muted text-right border-top pb-2">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-1">
+
+        </div>
 
     </div>
-
-</div>
-
 {% endblock content %}

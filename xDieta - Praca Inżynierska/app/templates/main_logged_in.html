@@ -11,6 +11,12 @@
     <li class="nav-item"><a href="{{ url_for('products_meals') }}" class="nav-link">Baza produktów i posiłków</a></li>
     <li class="nav-item"><a href="{{ url_for('diets') }}" class="nav-link">Diety</a></li>
     <li class="nav-item"><a href="{{ url_for('users_activities') }}" class="nav-link">Aktywności</a></li>
+    {% if perm == 1 %}
+        <li class="nav-item"><a href="{{ url_for('specialist') }}" class="nav-link">Specjalista</a></li>
+    {% endif %}
+    {% if perm == 2 %}
+        <li class="nav-item"><a href="{{ url_for('admin') }}" class="nav-link">Admin</a></li>
+    {% endif %}
 {% endblock nav1 %}
 {% block navigation %}
     <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Wyloguj</a> </li>
@@ -90,30 +96,44 @@
                     </thead>
                     <tbody>
 
-                        <tr>
-                            {% for row in data %}
-                                <td>
-                                    {{ row[0] }}
-                                </td>
-                            {% endfor %}
+                        {% if data == 'no_diets' %}
+                            <tr>
 
-                        </tr>
-                        <tr>
-                            {% for row in data %}
-                                <td>
-                                    <div class="border-top">
-                                        <small class="min">
-                                            {% for x in row[1] %}
-                                                {{ x[0] }} - {{ x[1] }}&nbsp;&nbsp;g<br>
-                                            {% endfor %}
-                                        </small>
-                                    </div>
-                                </td>
-                            {% endfor %}
+                                    <p class="text-center">
+                                        Nie masz dodanych diet. Przejdź do zakładki <a class="min" href="{{ url_for('diets') }}">Diety</a> , by je wygenerować.
+                                    </p>
 
-                        </tr>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                {% for row in data %}
+                                    <td>
+                                        {{ row[0] }}
+                                    </td>
+                                {% endfor %}
+
+                            </tr>
+                            <tr>
+                                {% for row in data %}
+                                    <td>
+                                        <div class="border-top">
+                                            <small class="min">
+                                                {% for x in row[1] %}
+                                                    {{ x[0] }} - {{ x[1] }}&nbsp;&nbsp;g<br>
+                                                {% endfor %}
+                                            </small>
+                                        </div>
+                                    </td>
+                                {% endfor %}
+
+
+                            </tr>
+                        {% endif %}
+
+
 
                     </tbody>
+
                 </table>
                 <div class="text-muted text-right border-top pb-2">
                     <small></small>
