@@ -272,6 +272,14 @@ class MySQLfind:
         except Exception as e:
             pass
 
+    def find_type_of_meals(table):
+        cursor.execute("SELECT type FROM " + table)
+        result = cursor.fetchall()
+        try:
+            return result
+        except Exception as e:
+            pass
+
     def find_meals_and_ingredients_for_table(username):
         meals = MySQLfind.find_for_table('posilki')
         personal_data = MySQLfind.find_weight_height_sex_age(username)
@@ -351,6 +359,31 @@ class MySQLfind:
         except Exception as e:
             pass
 
+    def find_for_dictionary(table):
+        cursor.execute("SELECT nazwa FROM " + table)
+        result = cursor.fetchall()
+        try:
+            return result
+        except Exception as e:
+            pass
+
+    def find_rows(table):
+        cursor.execute("SELECT * FROM " + table)
+        result = cursor.fetchall()
+        try:
+            return result
+        except Exception as e:
+            pass
+
+    def find_meals_by_type(type):
+        cursor.execute("SELECT id_posilku FROM posilki WHERE type = '{}'".format(type))
+        result = cursor.fetchall()
+        try:
+            return result
+        except Exception as e:
+            pass
+
+
 
 class MySQLinsert:
 
@@ -388,8 +421,22 @@ class MySQLinsert:
 
     def insert_diet_with_random_meals(username):
         id = []
-        for i in range(5):
-            id.append(random.randrange(1, 900, 1))
+        breakfast = MySQLfind.find_meals_by_type('1')
+        dinner = MySQLfind.find_meals_by_type('2')
+        between = MySQLfind.find_meals_by_type('3')
+        br = random.choice(breakfast)
+        id.append(br[0])
+        din = random.choice(dinner)
+        id.append(din[0])
+        bet = random.choice(between)
+        id.append(bet[0])
+        between.remove(bet)
+        bet = random.choice(between)
+        id.append(bet[0])
+        between.remove(bet)
+        bet = random.choice(between)
+        id.append(bet[0])
+
         sql_query = "INSERT INTO diety (posilek_1, posilek_2, posilek_3, posilek_4, posilek_5) VALUES " \
                     "('{}', '{}', '{}', '{}', '{}')".format(id[0], id[1], id[2], id[3], id[4])
         try:
@@ -465,6 +512,14 @@ class MySQLupdate:
 
     def update_user_rights(username, rights):
         sql_query = "UPDATE konta SET rights = '{}' WHERE username = '{}'".format(rights, username)
+        try:
+            cursor.execute(sql_query)
+            link.commit()
+        except Exception as e:
+            pass
+
+    def update_type(name, type):
+        sql_query = "UPDATE posilki SET type = '{}' WHERE nazwa = '{}'".format(type, name)
         try:
             cursor.execute(sql_query)
             link.commit()

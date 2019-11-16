@@ -10,11 +10,26 @@ from passlib.hash import sha256_crypt
 from functools import wraps
 from app import algorythm as algorythm
 
+import numpy
+
+
+
 
 find = MySQLfind
 insert = MySQLinsert
 update = MySQLupdate
 delete = MySQLdelete
+
+dictionary = {}
+
+list_of_products = find.find_for_dictionary("produkty")
+i = 0
+for name in list_of_products:
+    dictionary[name[0]] = i
+    i = i + 1
+
+
+from app import neural_network as nn
 
 
 def login_required(f):
@@ -432,6 +447,14 @@ def add_ingredient():
                 return redirect(url_for('admin'))
         insert.insert_ingredient(form.name.data, form.protein.data, form.fats.data, form.carbos.data)
         flash(f'Pomyślnie dodano produkt o nazwie {form.name.data}', 'success')
+        list_of_products = find.find_for_dictionary("produkty")
+        i = 0
+        for name in list_of_products:
+            dictionary[name[0]] = i
+            i = i + 1
+        meals = find.find_rows('posilki')
+        products = find.find_rows('produkty')
+        nn.train_types(len(meals), len(products))
         return redirect(url_for('admin'))
     return render_template('add_ingredient.html', title='Dodaj produkt', form=form, perm=perm[0])
 
@@ -464,6 +487,18 @@ def add_ingredient_to_meal():
         meal = find.find_meal_id_by_name(form.name.data)
         insert.insert_ingredient_into_meal(meal, form.ingredient.data, form.weight.data)
         flash(f'Pomyślnie dodano produkt do posiłku {form.name.data}.', 'success')
+        X = numpy.zeros((1, len(find.find_rows('produkty'))))
+
+        meals = MySQLfind.find_meals_for_table('')
+        for id, name, list in meals:
+            if name == form.name.data:
+                for prod_name, weight in list:
+                    number = dictionary[prod_name]
+                    X[0, number] = 1
+        pred = nn.predict_type(X)
+        meal_type = numpy.argmax(pred) + 1
+
+        update.update_type(form.name.data, meal_type)
         return redirect(url_for('add_ingredient_to_meal'))
     return render_template('add_ingredient_to_meal.html', title='Dodaj produkt do posiłku', data=data, form=form, perm=perm[0])
 
